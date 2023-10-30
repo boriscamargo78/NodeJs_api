@@ -1,3 +1,5 @@
+//Author: Boris Camargo
+
 //Declaración de variales//
 var express = require("express")
 global.app = express() //Para que se ejecute como funcionalidad//
