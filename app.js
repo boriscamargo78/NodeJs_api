@@ -1,86 +1,37 @@
 //Declaración de variales//
 var express = require("express")
-var app = express() //Para que se ejecute como funcionalidad//
+global.app = express() //Para que se ejecute como funcionalidad//
 var puerto = 3000 //Puerto escogido para la aplicación//
+// Importar el módulo body-parser para parsear el cuerpo de la solicitud
+var bodyParser = require("body-parser");
+app.use(bodyParser.json()); // Usar body-parser para parsear el cuerpo de las solicitudes JSON
+app.use(bodyParser.urlencoded({extended:true}))
 
-var producto = [
-    {
-        codigo: 000001,
-        nombre: "Logitec",
-        descripcion: "Mouse corriente",
-        precio: 50000
-    }, {
-        codigo: 000002,
-        nombre: "Apple",
-        descripcion: "Mouse para Mac",
-        precio: 90000
-    }, {
-        codigo: 000003,
-        nombre: "DSFY",
-        descripcion: "Mouse gamer",
-        precio: 70000
-    }
-]
+require("./routes.js")
 
-//Ingresar, guardar productos nuevos al array//
-app.post("/producto/Guardar", function (request, response) {
-    var codigo = request.body.codigo
-    var nombre = request.body.nombre
-    var descripcion = request.body.descripcion
-    var precio = request
-        .body
-        .precio
+//MODELO VISTA CONTROLADOR
 
-    console.log(codigo)
-    console.log(nombre)
-    console.log(descripcion)
-    console.log(precio)
 
-    producto.push(
-        {codigo: codigo, nombre: nombre, descripcion: descripcion, precio: precio}
-    )
-    //status de http//
-    response
-        .status(200)
-        .json({producto})
-
+//CREATE --> 01 Api: Ingresar, guardar productos nuevos al array//
+app.post("/producto/guardar", function (request, response) {
+   
 })
 
-//Api
-/* app.get("/sumar/:numero1/:numero2", function(request,response) {
-
-    var num1 = parseInt(request.params.numero1)
-    var num2 = parseInt(request.params.numero2)
-    response.json({ total: num1 + num2 })
-})  */
-
-//Listar Productos
-app.get("/producto/CargarTodos", function(request, response) {
-    response.json(producto)
+//READ --> 02 Api: Listar
+app.get("/producto/listarTodos", function (request, response) {
 })
 
-//Listar por Codigo
-app.get("/producto/:codigo", function(request, response){
-    var codigo = request.params.codigo
+//READ --> 03 Api: Listar por Codigo
+app.get("/producto/:codigo", function (request, response) {
+})
 
-    var posicion = producto.find((item) => (
-        item.codigo == codigo))
+//UPDATE --> 04 Api: Modificar Productos
+app.post("/producto/modificar", function (request, response) {    
+})
 
-    console.log(posicion)
+//DELETE --> 05 Api: Eliminar Productos
+app.post("/producto/eliminar", function (request, response) {
 
-    if (posicion == -1) {
-        response.json({ state: false, mensaje: "El codigo de producto no es correcto" })
-    }
-
-    if (posicion == 0) {
-        response.json({ state: true, mensaje: "Codigo existente" })
-        
-    }
-
-    if (posicion == undefined) {
-        response.json({ state: false, mensaje: "No se encontraron datos de producto" })
-        
-    }
 
 })
 
