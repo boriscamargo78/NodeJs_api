@@ -52,22 +52,16 @@ productoController.listarTodos = function(request, response) {
 
 }
 
-productoController.codigo = function(request, response) {
+productoController.obtenerProductoPorCodigo = function(request, response) {
+    var codigo = parseInt(request.params.codigo);
+    var productoEncontrado = productoModel.obtenerProductoPorCodigo(codigo);
 
-    var codigo = request.params.codigo
-
-    var posicion = producto.findIndex((item) => (item.codigo == codigo))
-
-    if (posicion !== -1) {
-        response.json({state: true, mensaje: "Producto encontrado"})
+    if (productoEncontrado) {
+        response.json({ state: true, mensaje: "Producto encontrado", producto: productoEncontrado });
+    } else {
+        response.json({ state: false, mensaje: "Producto no encontrado" });
     }
-
-    else {
-        response.json({state: false, mensaje: "Codigo existente"});
-
-    }
- 
-} 
+};
 
 
 productoController.modificar = function(request, response) {
@@ -110,19 +104,19 @@ productoController.eliminar = function(request, response) {
 
     var post = {
         codigo:request.body.codigo
-    }
+    };
 
     
-    if (codigo == undefined || codigo == null || codigo == "") {
-        response.json({ state: false, mensaje:"Este campo es obligatorio" })
-        return false
+    if (post.codigo == undefined || post.codigo == null || post.codigo == "") {
+        response.json({ state: false, mensaje:"Este campo es obligatorio" });
+        return;
     }
 
     productoModel.eliminar(post,function(respuesta) {
-        response.json(respuesta)        
+        response.json(respuesta);        
     })    
 
 }
 
-module.exports.productoController = productoController
+module.exports.productoController = productoController;
 

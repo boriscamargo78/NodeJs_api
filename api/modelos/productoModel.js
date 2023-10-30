@@ -31,9 +31,9 @@ productoModel.listarTodos = function(post,callback) {
 return callback(producto)
 }
 
-productoModel.codigo = function(post,callback) {
-return productoModel.producto.findIndex((item) => item.codigo == codigo)
-
+productoModel.obtenerProductoPorCodigo = function(codigo) {
+    var productoEncontrado = producto.find(item => item.codigo == codigo);
+    return productoEncontrado;
 };
 
 
@@ -66,6 +66,6 @@ productoModel.eliminar = function(post, callback) {
 
 }
 
-module.exports.productoModel = productoModel
-module.exports.producto = producto
+module.exports.productoModel = productoModel;
+
 

@@ -7,10 +7,10 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json()); // Usar body-parser para parsear el cuerpo de las solicitudes JSON
 app.use(bodyParser.urlencoded({extended:true}))
 
-require("./routes.js")
+var routes = require("./routes.js")(app);
+
 
 //MODELO VISTA CONTROLADOR
-
 
 //CREATE --> 01 Api: Ingresar, guardar productos nuevos al array//
 app.post("/producto/guardar", function (request, response) {
