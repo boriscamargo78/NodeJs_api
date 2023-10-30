@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 var routes = require("./routes.js")(app);
 
 
-//MODELO VISTA CONTROLADOR - APIs
+//MODELO VISTA CONTROLADOR - APIs de CRUD
 
 
 //CREATE --> 01 Api: Ingresar, guardar productos nuevos al array//
